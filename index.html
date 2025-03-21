@@ -1,1 +1,144 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My GitHub Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+        .nav-bar {
+            background-color: #444;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+        .nav-bar a {
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+        .nav-bar a:hover {
+            background-color: #0073b1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .contact {
+            margin-top: 20px;
+        }
+        .contact a {
+            display: inline-block;
+            margin: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+        .contact a:hover {
+            color: #0073b1;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .messages {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .messages ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .messages li {
+            background: #f4f4f4;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+    
+    <div class="nav-bar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="#messages-list">Received Messages</a> <!-- New nav item -->
+    </div>
+    
+    <div class="container">
+        <h2>About This Site</h2>
+        <p>This is a simple website hosted on GitHub Pages. You can edit and expand it as needed.</p>
+        
+        <h3>Get Started</h3>
+        <p>Edit this file and commit the changes to see updates live on your GitHub Pages site.</p>
+        
+        <div class="messages">
+            <ul id="messages-list">
+                <!-- Messages will be inserted here by JavaScript -->
+            </ul>
+        </div>
+        
+        <div class="contact">
+            <h3>Contact Me</h3>
+            <a href="mailto:your-gbmcooper16@gmail.com">📧 Email Me</a>
+            <a href="https://www.linkedin.com/in/gareth-cooper-5b3780352?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BuCW3nppTRFu%2F3i9W4XZ3Og%3D%3D" target="_blank">🔗 LinkedIn</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 My Website | Powered by GitHub Pages</p>
+    </footer>
+
+    <script>
+        // Fetch messages from the server and update the list
+        async function fetchMessages() {
+            try {
+                const response = await fetch('messages.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const messages = await response.json();
+                const messagesList = document.getElementById('messages-list');
+                messagesList.innerHTML = '';
+                messages.forEach(message => {
+                    const li = document.createElement('li');
+                    li.textContent = message;
+                    messagesList.appendChild(li);
+                });
+                console.log('Messages fetched and displayed successfully.');
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        }
+
+        // Fetch messages when the page loads
+        fetchMessages();
+    </script>
+</body>
+</html>
